@@ -15,3 +15,15 @@
  1x SD Karte
  
 # Software
+ Add the following at the end of the file /home/<user>/.profile
+ >>$ sudo python3 /path/to/start.py<<
+ 
+ Enable Auto Login in raspi-config under 1/S5
+ 
+ make sure the following python packages are installed:
+  time
+  RPi.GPIO
+  os
+  math
+  
+ Change the GPIOPin numbers in scripts.py and start.py according to your connections (a config file will follow)

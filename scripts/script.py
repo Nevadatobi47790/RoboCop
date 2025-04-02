@@ -1,6 +1,7 @@
   #main controll class
 import time
 import RPi.GPIO as GPIO
+import math
 
 GPIO.setmode(GPIO.BCM)
 
@@ -19,16 +20,41 @@ class bein:
         self.GelKn = GELKN
         self.GelFu = GELFU
 
+    #x - Rechts Links koordinate, Positiv ist immer weg vom Koerper
+    #y - Vorne Hinten koordinate, Positiv ist immmer weg vom Koerper
+    #z - Oben unten Koordinate, Positiv ist immmer nach unten
+    #d - Winkel des fusses auf dem Boden
+    #Alle Variablen in Bruchteilen einer Bein-teil-laenge (~63mm)
+    #Berechnung Check ich selber nicht
+    def PosToRad(self, x, y, z, d):
+        Koerper = math.tan(x / y)
+        a = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+        Ah = math.sqrt(math.pow(z-math.sin(d), 2) + math.pow(a-math.cos(d), 2))
+        Alpha = math.acos(0,5 * Ah)
+        Delta = math.tan((z-math.sin(d))/(a-math.cos(d)))
+        Huefte = Alpha + Delta
+        Knie = pi - 2 * Alpha
+        Epsylon = math.tan(z/a)
+        En = math.pi / 2 - Delta + Epsylon
+        be = math.sqrt(pow(a, 2) + pow(z, 2))
+        be1 = math.cos(Delta-Epsylon) * Ah
+        Oh = math.asin(be - be1)
+        Fuss = En + Alpha + Oh
+        print([Koerper, Huefte, Knie, Fuss])
+        return [Koerper, Huefte, Knie, Fuss]
 
 
 class gelenk:
     def __init__(self, PINNUM, DEFAULT):
         self.PinNum = PINNUM
         self.Default = DEFAULT
+        #initiiert den Servo
         GPIO.setup(self.PinNum, GPIO.OUT)
         self.Pin = GPIO.PWM(self.PinNum, 50)
         self.Pin.start(self.RadToPWM(self.Default))
 
+
+    #Uebersetzt einen gegebenen Winkel von xPi zu einer PWM frequenz
     def RadToPWM(self, rad):
         if rad >= 0 and rad <= 1:
             return rad*10 + 2.5
@@ -45,6 +71,7 @@ class gelenk:
 #GPIOpins = [2, 3, 17, 4, 14, 15, 18, 23, 12, 16, 20, 21, 6, 13, 19, 26]
 
 default = 0.5
+#KO = Koerper   HU = Huefte   KN = Knie   FU = Fuss   GEL = Gelenk
 
 #BeinVR
 GELKO = gelenk(2, default)
