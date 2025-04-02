@@ -30,10 +30,10 @@ class bein:
         Koerper = math.tan(x / y)
         a = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
         Ah = math.sqrt(math.pow(z-math.sin(d), 2) + math.pow(a-math.cos(d), 2))
-        Alpha = math.acos(0,5 * Ah)
+        Alpha = math.acos(0.5 * Ah)
         Delta = math.tan((z-math.sin(d))/(a-math.cos(d)))
         Huefte = Alpha + Delta
-        Knie = pi - 2 * Alpha
+        Knie = math.pi - 2 * Alpha
         Epsylon = math.tan(z/a)
         En = math.pi / 2 - Delta + Epsylon
         be = math.sqrt(pow(a, 2) + pow(z, 2))
