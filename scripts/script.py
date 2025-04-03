@@ -149,7 +149,8 @@ while True:
     x = float(input("x - "))
     y = float(input("y - "))
     h = float(input("h - "))
-    Guenther_in.setall(x, y, h, 0.49)
+    d = float(input("d - "))
+    Guenther_in.setall(x, y, h, d)
 
 
 """
