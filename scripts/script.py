@@ -51,15 +51,16 @@ class bein:
 
         except ValueError as e:
             print(e)
-        except TypeError as e:
-            print(e)
 
     def set(self, x, y, z, d):
         Rad = self.PosToRad(x, y, z, d)
-        self.GelKo.set(Rad[0])
-        self.GelHu.set(Rad[1])
-        self.GelKn.set(Rad[2])
-        self.GelFu.set(Rad[3])
+        try:
+            self.GelKo.set(Rad[0])
+            self.GelHu.set(Rad[1])
+            self.GelKn.set(Rad[2])
+            self.GelFu.set(Rad[3])
+        except TypeError as e:
+            print(e)
 
 
 class gelenk:
