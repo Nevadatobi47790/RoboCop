@@ -146,9 +146,9 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
 while True:
-    x = input("x - ")
-    y = input("y - ")
-    h = input("h - ")
+    x = float(input("x - "))
+    y = float(input("y - "))
+    h = float(input("h - "))
     Guenther_in.setall(x, y, h, 0.5)
 
 
