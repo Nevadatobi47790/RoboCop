@@ -12,6 +12,11 @@ class robo:
         self.BeinHL = BEINHL
         self.BeinVL = BEINVL
 
+    def setall(self, x, y, z, d):
+        self.BeinVR.set(x, y, z, d)
+        self.BeinHR.set(x, y, z, d)
+        self.BeinHL.set(x, y, z, d)
+        self.BeinVL.set(x, y, z, d)
 
 class bein:
     def __init__(self, GELKO, GELHU, GELKN, GELFU):
@@ -42,6 +47,13 @@ class bein:
         Fuss = En + Alpha + Oh
         print([Koerper, Huefte, Knie, Fuss])
         return [Koerper, Huefte, Knie, Fuss]
+
+    def set(self, x, y, z, d):
+        Rad = self.PosToRad(x, y, z, d)
+        self.GelKo.set(Rad[0])
+        self.GelHu.set(Rad[1])
+        self.GelKn.set(Rad[2])
+        self.GelFu.set(Rad[3])
 
 
 class gelenk:
@@ -107,7 +119,12 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
+Guenther_in.setall(1, 1, 1, 0.5)
 
+
+
+
+"""
 v = 0.25
 va = 0.75
 
@@ -128,63 +145,72 @@ while True:
             va = 0.75
             v = 0.25
 
-#pins = []
-#posPins = []
-#supposPins = []
-#startVal = 7.5
-#speed = 0.05
+pins = []
+posPins = []
+supposPins = []
+startVal = 7.5
+speed = 0.05
 
-#def set(pin, pos):
-#    posPins[pin] = pos
-#    supposPins[pin] = pos
-#    pins[pin].ChangeDutyCycle(pos)
+def set(pin, pos):
+    posPins[pin] = pos
+    supposPins[pin] = pos
+    pins[pin].ChangeDutyCycle(pos)
 
-#def move(pin, pos):
-#    supposPins[pin] = pos
-#    while True:
-#        if posPins[pin] - supposPins[pin] > speed:
-#            set(pin, posPins[pin] + speed)
-#            time.sleep(0.01)
-#        elif supposPins[pin] - posPins[pin] > speed:
-#            set(pin, posPins[pin] - speed)
-#            time.sleep(0.01)
-#        else:
-#            set(pin, supposPins[pin])
-#            break
+def move(pin, pos):
+    supposPins[pin] = pos
+    while True:
+        if posPins[pin] - supposPins[pin] > speed:
+            set(pin, posPins[pin] + speed)
+            time.sleep(0.01)
+        elif supposPins[pin] - posPins[pin] > speed:
+            set(pin, posPins[pin] - speed)
+            time.sleep(0.01)
+        else:
+            set(pin, supposPins[pin])
+            break
 
-#GPIO.setmode(GPIO.BCM)
-#for i in range(16):
-#    GPIO.setup(GPIOpins[i], GPIO.OUT)
-#    pins.append(GPIO.PWM(GPIOpins[i], 50))
-#    posPins.append(startVal)
-#    supposPins.append(startVal)
-#    pins[i].start(startVal)
+GPIO.setmode(GPIO.BCM)
+for i in range(16):
+    GPIO.setup(GPIOpins[i], GPIO.OUT)
+    pins.append(GPIO.PWM(GPIOpins[i], 50))
+    posPins.append(startVal)
+    supposPins.append(startVal)
+    pins[i].start(startVal)
 
-#for i in range(3):
-#    pins[i*4].ChangeDutyCycle(7.5)
-#    pins[i*4+1].ChangeDutyCycle(11)
-#    pins[i*4+2].ChangeDutyCycle(7)
-#    pins[i*4+3].ChangeDutyCycle(7)
+for i in range(3):
+    pins[i*4].ChangeDutyCycle(7.5)
+    pins[i*4+1].ChangeDutyCycle(11)
+    pins[i*4+2].ChangeDutyCycle(7)
+    pins[i*4+3].ChangeDutyCycle(7)
 
-#for i in range(11, 16):
-#     pins[i].ChangeDutyCycle(7.5)
+for i in range(11, 16):
+     pins[i].ChangeDutyCycle(7.5)
+
+"""
+
+
 
 while True:
      time.sleep(100)
-#    for i in range(16):
-#        print("Servo " + str(i) + " auf klein")
-#        pins[i].ChangeDutyCycle(6)
-#        time.sleep(0.2)
-#    time.sleep(1)
-#    for i in range(16):
-#        pins[i].ChangeDutyCycle(7.5)
-#        time.sleep(0.2)
-#    time.sleep(1)
-#    for i in range(16):
-#        print("Servo " + str(i) + " auf hoch")
-#        pins[i].ChangeDutyCycle(9)
-#        time.sleep(0.2)
-#    time.sleep(1)
+
+
+"""
+    for i in range(16):
+        print("Servo " + str(i) + " auf klein")
+        pins[i].ChangeDutyCycle(6)
+        time.sleep(0.2)
+    time.sleep(1)
+    for i in range(16):
+        pins[i].ChangeDutyCycle(7.5)
+        time.sleep(0.2)
+    time.sleep(1)
+    for i in range(16):
+        print("Servo " + str(i) + " auf hoch")
+        pins[i].ChangeDutyCycle(9)
+        time.sleep(0.2)
+    time.sleep(1)
+
+"""
 
 GPIO.cleanup()
 
