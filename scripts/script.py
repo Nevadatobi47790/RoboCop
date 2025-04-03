@@ -13,7 +13,7 @@ class robo:
         self.BeinVL = BEINVL
 
     def setall(self, x, y, h, d):
-        self.BeinVR.set(x, y, h, d)
+        self.BeinHR.set(x, y, h, d)
 
 class bein:
     def __init__(self, GELKO, GELHU, GELKN, GELFU):
