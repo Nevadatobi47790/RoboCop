@@ -51,6 +51,8 @@ class bein:
 
         except ValueError as e:
             print(e)
+        except TypeError as e:
+            print(e)
 
     def set(self, x, y, z, d):
         Rad = self.PosToRad(x, y, z, d)
