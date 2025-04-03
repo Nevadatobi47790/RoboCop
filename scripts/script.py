@@ -124,10 +124,10 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
-for x in range(0, 3, 0.25):
-    for y in range(0, 3, 0.25):
-        for z in range(0, 3, 0.25):
-            Guenther_in.setall(x, y, z, 0.5*math.pi)
+for x in range(12):
+    for y in range(12):
+        for z in range(12):
+            Guenther_in.setall(x/4, y/4, z/4, 0.5*math.pi)
             time.sleep(1)
 
 
