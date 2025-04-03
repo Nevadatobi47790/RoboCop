@@ -119,7 +119,7 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
-Guenther_in.setall(1, 1, 1, 1*math.pi)
+Guenther_in.setall(1, 2, 2, 0.5*math.pi)
 
 
 
