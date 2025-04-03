@@ -32,21 +32,25 @@ class bein:
     #Alle Variablen in Bruchteilen einer Bein-teil-laenge (~63mm)
     #Berechnung Check ich selber nicht
     def PosToRad(self, x, y, z, d):
-        Koerper = math.tan(x / y)
-        a = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
-        Ah = math.sqrt(math.pow(z-math.sin(d), 2) + math.pow(a-math.cos(d), 2))
-        Alpha = math.acos(0.5 * Ah)
-        Delta = math.tan((z-math.sin(d))/(a-math.cos(d)))
-        Huefte = Alpha + Delta
-        Knie = math.pi - 2 * Alpha
-        Epsylon = math.tan(z/a)
-        En = math.pi / 2 - Delta + Epsylon
-        be = math.sqrt(pow(a, 2) + pow(z, 2))
-        be1 = math.cos(Delta-Epsylon) * Ah
-        Oh = math.asin(be - be1)
-        Fuss = En + Alpha + Oh
-        print([Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi])
-        return [Koerper, Huefte, Knie, Fuss]
+        try:
+            Koerper = math.tan(x / y)
+            a = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+            Ah = math.sqrt(math.pow(z-math.sin(d), 2) + math.pow(a-math.cos(d), 2))
+            Alpha = math.acos(0.5 * Ah)
+            Delta = math.tan((z-math.sin(d))/(a-math.cos(d)))
+            Huefte = Alpha + Delta
+            Knie = math.pi - 2 * Alpha
+            Epsylon = math.tan(z/a)
+            En = math.pi / 2 - Delta + Epsylon
+            be = math.sqrt(pow(a, 2) + pow(z, 2))
+            be1 = math.cos(Delta-Epsylon) * Ah
+            Oh = math.asin(be - be1)
+            Fuss = En + Alpha + Oh
+            print([Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi])
+            return [Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi]
+
+        except ValueError as e:
+            print(e)
 
     def set(self, x, y, z, d):
         Rad = self.PosToRad(x, y, z, d)
@@ -71,6 +75,7 @@ class gelenk:
         if rad >= 0 and rad <= 1:
             return rad*10 + 2.5
         else:
+            print("ValueError: Value " + str(rad) + " out of Range")
             return self.Default*10 + 2.5
 
     def set(self, rad):
@@ -119,7 +124,11 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
-Guenther_in.setall(1, 2, 2, 0.5*math.pi)
+for x in range(0, 3, 0.25):
+    for y in range(0, 3, 0.25):
+        for z in range(0, 3, 0.25):
+            Guenther_in.setall(x, y, z, 0.5*math.pi)
+            time.sleep(1)
 
 
 
