@@ -45,7 +45,7 @@ class bein:
         be1 = math.cos(Delta-Epsylon) * Ah
         Oh = math.asin(be - be1)
         Fuss = En + Alpha + Oh
-        print([Koerper, Huefte, Knie, Fuss])
+        print([Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi])
         return [Koerper, Huefte, Knie, Fuss]
 
     def set(self, x, y, z, d):
