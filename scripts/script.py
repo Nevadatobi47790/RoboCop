@@ -151,7 +151,6 @@ for x in range(300):
             print()
             print([x, y, h, d])
             Guenther_in.setall(x/100+1, y/100+1, h/100+1, d)
-            input()
 
 """
 v = 0.25
