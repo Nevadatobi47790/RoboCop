@@ -12,11 +12,11 @@ class robo:
         self.BeinHL = BEINHL
         self.BeinVL = BEINVL
 
-    def setall(self, x, y, z, d):
-        self.BeinVR.set(x, y, z, d)
-        self.BeinHR.set(x, y, z, d)
-        self.BeinHL.set(x, y, z, d)
-        self.BeinVL.set(x, y, z, d)
+    def setall(self, x, y, h, d):
+        self.BeinVR.set(x, y, h, d)
+        self.BeinHR.set(x, y, h, d)
+        self.BeinHL.set(x, y, h, d)
+        self.BeinVL.set(x, y, h, d)
 
 class bein:
     def __init__(self, GELKO, GELHU, GELKN, GELFU):
@@ -27,33 +27,51 @@ class bein:
 
     #x - Rechts Links koordinate, Positiv ist immer weg vom Koerper
     #y - Vorne Hinten koordinate, Positiv ist immmer weg vom Koerper
-    #z - Oben unten Koordinate, Positiv ist immmer nach unten
+    #h - Oben unten Koordinate, Positiv ist immmer nach unten
     #d - Winkel des fusses auf dem Boden
     #Alle Variablen in Bruchteilen einer Bein-teil-laenge (~63mm)
     #Berechnung Check ich selber nicht
-    def PosToRad(self, x, y, z, d):
+    def PosToRad(self, x, y, h, d):
+
+        Koerper = 0.5
+        Huefte = 0.5
+        Knie = 0.5
+        Fuss = 0.5
+
         try:
-            Koerper = math.tan(x / y)
-            a = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
-            Ah = math.sqrt(math.pow(z-math.sin(d), 2) + math.pow(a-math.cos(d), 2))
-            Alpha = math.acos(0.5 * Ah)
-            Delta = math.tan((z-math.sin(d))/(a-math.cos(d)))
-            Huefte = Alpha + Delta
-            Knie = math.pi - 2 * Alpha
-            Epsylon = math.tan(z/a)
-            En = math.pi / 2 - Delta + Epsylon
-            be = math.sqrt(pow(a, 2) + pow(z, 2))
-            be1 = math.cos(Delta-Epsylon) * Ah
-            Oh = math.asin(be - be1)
-            Fuss = En + Alpha + Oh
-            print([Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi])
-            return [Koerper/math.pi, Huefte/math.pi, Knie/math.pi, Fuss/math.pi]
+            d = d * math.pi
+            Koerper = math.tan(x/y)
+            lenght = math.sqrt(x*x + y*y)
+            lenght1 = math.cos(d)
+            lenght2 = lenght - lenght1
+            h1 = math.sin(d)
+            h2 = h - h1
+            Huefte1 = math.atan(lenght2/h2)
+            KnSehne = math.sqrt(h2*h2 + lenght2*lenght2)
+            Huefte2 = math.acos(0.5 * KnSehne)
+            Huefte = Huefte1 + Huefte2
+            Knie = math.pi - 2*Huefte2
+            d1 = math.atan(h/lenght)
+            d2 = d - d1
+            Fuss1 = 0.5 * math.pi - d2
+            Huefte3 = math.tan(h/lenght)
+            Huefte4 = Huefte1 - Huefte3
+            Fuss2 = 0.5 * math.pi - Huefte4
+            Fuss = Fuss1 + Fuss2 + Huefte2
+
+            Koerper = Koerper / math.pi
+            Huefte = Huefte / math.pi
+            Knie = Knie / math.pi
+            Fuss = Fuss / math.pi
 
         except ValueError as e:
             print(e)
 
-    def set(self, x, y, z, d):
-        Rad = self.PosToRad(x, y, z, d)
+        return [Koerper, Huefte, Knie, Fuss]
+
+
+    def set(self, x, y, h, d):
+        Rad = self.PosToRad(x, y, h, d)
         try:
             self.GelKo.set(Rad[0])
             self.GelHu.set(Rad[1])
@@ -127,13 +145,11 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
-for x in range(12):
-    for y in range(12):
-        for z in range(12):
-            Guenther_in.setall(x/4+1, y/4+1, z/4+1, 0.5*math.pi)
-            time.sleep(1)
-
-
+while True:
+    x = input("x - ")
+    y = input("y - ")
+    h = input("h - ")
+    Guenther_in.setall(x, y, h, 0.5)
 
 
 """
