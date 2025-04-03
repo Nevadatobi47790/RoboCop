@@ -92,9 +92,9 @@ class gelenk:
     def RadToPWM(self, rad):
         if rad >= 0 and rad <= 1:
             return rad*10 + 2.5
-        else if rad < 0:
+        elif rad < 0:
             return 2.5
-        else if rad > 1:
+        elif rad > 1:
             return 12.5
 
     def set(self, rad):
