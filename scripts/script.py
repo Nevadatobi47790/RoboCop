@@ -151,7 +151,7 @@ for x in range(30):
             print()
             print([x, y, h, d])
             Guenther_in.setall(x/10+1, y/10+1, h/10+1, d)
-            time.sleep(0.1)
+            time.sleep(0.01)
 
 """
 v = 0.25
