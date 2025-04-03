@@ -62,7 +62,7 @@ class bein:
             Koerper = Koerper / math.pi
             Huefte = Huefte / math.pi
             Knie = Knie / math.pi
-            Fuss = Fuss / math.pi
+            Fuss = 1 - Fuss / math.pi
 
         except ValueError as e:
             print(e)
