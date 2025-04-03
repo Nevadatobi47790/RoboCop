@@ -144,13 +144,14 @@ Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
 
 d = 0.49
-for x in range(300):
-    for y in range(300):
-        for h in range(300):
+for x in range(30):
+    for y in range(30):
+        for h in range(30):
             print()
             print()
             print([x, y, h, d])
-            Guenther_in.setall(x/100+1, y/100+1, h/100+1, d)
+            Guenther_in.setall(x/10+1, y/10+1, h/10+1, d)
+            time.sleep(0.1)
 
 """
 v = 0.25
