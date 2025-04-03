@@ -3,9 +3,12 @@ import os
 import time
 import RPi.GPIO as GPIO
 
+"""
 os.system('sudo systemctl start NetworkManager')
 time.sleep(2)
 os.system('sudo nmcli device wifi hotspot ssid robocopWifi password Enes_ist_hot ifname wlan0')
+"""
+
 
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(3, GPIO.OUT)
