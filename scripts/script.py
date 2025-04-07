@@ -28,41 +28,61 @@ class bein:
     #d - Winkel des fusses auf dem Boden
     #Alle Variablen in Bruchteilen einer Bein-teil-laenge (~63mm)
     #Berechnung Check ich selber nicht
-    def PosToRad(self, x, y, h, d):
+    def PosToRad(x, y, h, d):
 
-        Koerper = 0.5
-        Huefte = 0.5
-        Knie = 0.5
-        Fuss = 0.5
+        ord = d
+        neg = False
+        err = False
+        Koerper = 0
+        Huefte = 0
+        Knie = 0
+        Fuss = 0
 
-        try:
-            d = d * math.pi
-            Koerper = math.tan(x/y)
-            lenght = math.sqrt(x*x + y*y)
-            lenght1 = math.cos(d)
-            lenght2 = lenght - lenght1
-            h1 = math.sin(d)
-            h2 = h - h1
-            Huefte1 = math.atan(lenght2/h2)
-            KnSehne = math.sqrt(h2*h2 + lenght2*lenght2)
-            Huefte2 = math.acos(0.5 * KnSehne)
-            Huefte = Huefte1 + Huefte2
-            Knie = math.pi - 2*Huefte2
-            d1 = math.atan(h/lenght)
-            d2 = d - d1
-            Fuss1 = 0.5 * math.pi - d2
-            Huefte3 = math.tan(h/lenght)
-            Huefte4 = Huefte1 - Huefte3
-            Fuss2 = 0.5 * math.pi - Huefte4
-            Fuss = Fuss1 + Fuss2 + Huefte2
+        while not ( 0 < Koerper < 1 and 0 < Huefte < 1 and 0 < Knie < 1 and 0 < Fuss < 1 ):
+            print(d)
+            try:
+                de = d * math.pi
+                Koerper = math.tan(x/y)
+                lenght = math.sqrt(x*x + y*y)
+                lenght1 = math.cos(de)
+                lenght2 = lenght - lenght1
+                h1 = math.sin(de)
+                h2 = h - h1
+                Huefte1 = math.atan(lenght2/h2)
+                KnSehne = math.sqrt(h2*h2 + lenght2*lenght2)
+                Huefte2 = math.acos(0.5 * KnSehne)
+                Huefte = Huefte1 + Huefte2
+                Knie = math.pi - 2*Huefte2
+                d1 = math.atan(h/lenght)
+                d2 = de - d1
+                Fuss1 = 0.5 * math.pi - d2
+                Huefte3 = math.tan(h/lenght)
+                Huefte4 = Huefte1 - Huefte3
+                Fuss2 = 0.5 * math.pi - Huefte4
+                Fuss = Fuss1 + Fuss2 + Huefte2
 
-            Koerper = Koerper / math.pi
-            Huefte = Huefte / math.pi
-            Knie = Knie / math.pi
-            Fuss = 1 - Fuss / math.pi
+                Koerper = Koerper / math.pi
+                Huefte = Huefte / math.pi
+                Knie = Knie / math.pi
+                Fuss = 1 - Fuss / math.pi
 
-        except ValueError as e:
-            print(e)
+            except ValueError as e:
+                print(e)
+            except ZeroDivisionError as e:
+                print(e)
+
+            if neg:
+                d = d + 0.01
+            else:
+                d = d - 0.01
+            if d < 0:
+                neg = True
+                d = ord
+            elif d > 1:
+                err = True
+                d = ord
+            if err:
+                return [0.5, 0.5, 0.5, 0.5]
 
         return [Koerper, Huefte, Knie, Fuss]
 
@@ -142,6 +162,7 @@ GELFU = gelenk(26, default)
 BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
+
 
 while True:
     x = float(input("x - "))
