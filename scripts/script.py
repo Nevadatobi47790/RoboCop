@@ -187,7 +187,7 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
 
-"""
+
 for x in range(60):
     Guenther_in.setall(x/20+0.01, 0.01, 0.01, 0.5)
     print("x: - " + str(x/20+0.01) + "\n\n\n")
@@ -202,9 +202,9 @@ for h in range(60):
     Guenther_in.setall(0.01, 0.01, h/20+0.01, 0.5)
     print("h: - " + str(h/20+0.01) + "\n\n\n")
     time.sleep(0.1)
-"""
 
-while True:
+
+while False:
     x = float(input("x - "))
     y = float(input("y - "))
     h = float(input("h - "))
