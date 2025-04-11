@@ -82,7 +82,7 @@ class bein:
                 err = True
                 d = ord
             if err:
-                return [0.5, 0.5, 0.5, 0.5]
+                return NULL
 
         return [Koerper, Huefte, Knie, Fuss]
 
@@ -253,7 +253,7 @@ for i in range(11, 16):
 
 
 
-while True:
+while False:
      time.sleep(100)
 
 
