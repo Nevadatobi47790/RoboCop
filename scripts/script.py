@@ -168,6 +168,7 @@ for x in range(60):
         for h in range(60):
             d = 0.5
             Guenther_in.setall(x/20, y/20, h/20, d)
+            time.sleep(1)
 
 
 
