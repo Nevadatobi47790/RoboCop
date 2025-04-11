@@ -174,7 +174,7 @@ for y in range(60):
     time.sleep(0.1)
 
 for h in range(60):
-    Guenther_in.setall(0.01, 0.01, h/20+0.01, d)
+    Guenther_in.setall(0.01, 0.01, h/20+0.01, 0.5)
     print("h: - " + str(h/20+0.01) + "\n\n\n")
     time.sleep(0.1)
 
