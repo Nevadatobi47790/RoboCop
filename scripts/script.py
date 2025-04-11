@@ -172,8 +172,7 @@ for x in range(60):
             print(y/20)
             print(h/20)
             print("\n\n\n")
-            time.sleep(5)
-
+            time.sleep(0.5)
 
 
 while False:
