@@ -82,7 +82,7 @@ class bein:
                 err = True
                 d = ord
             if err:
-                return NULL
+                return False
 
         return [Koerper, Huefte, Knie, Fuss]
 
