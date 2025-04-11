@@ -168,7 +168,11 @@ for x in range(60):
         for h in range(60):
             d = 0.5
             Guenther_in.setall(x/20, y/20, h/20, d)
-            time.sleep(1)
+            print(x/20)
+            print(y/20)
+            print(h/20)
+            print("\n\n\n")
+            time.sleep(5)
 
 
 
