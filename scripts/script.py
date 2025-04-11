@@ -92,7 +92,7 @@ class bein:
         try:
             self.GelKo.set(Rad[0])
             self.GelHu.set(Rad[1])
-            self.GelKn.set(-1 * Rad[2])
+            self.GelKn.set(Rad[2])
             self.GelFu.set(Rad[3])
         except TypeError as e:
             print(e)
