@@ -28,7 +28,7 @@ class bein:
     #d - Winkel des fusses auf dem Boden
     #Alle Variablen in Bruchteilen einer Bein-teil-laenge (~63mm)
     #Berechnung Check ich selber nicht
-    def PosToRad(x, y, h, d):
+    def PosToRad(self, x, y, h, d):
 
         ord = d
         neg = False
