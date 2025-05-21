@@ -186,7 +186,7 @@ BeinVL = bein(GELKO, GELHU, GELKN, GELFU)
 
 Guenther_in = robo(BeinVR, BeinHR, BeinHL, BeinVL)
 
-
+#Das Folgende sind Test Sequenzen
 
 for x in range(60):
     Guenther_in.setall(x/20+0.01, 0.01, 0.01, 0.5)
